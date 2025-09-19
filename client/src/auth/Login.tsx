@@ -1,0 +1,115 @@
+import { Button } from "@/components/ui/button";
+import { userLoginSchema, type loginInputState } from "@/schema/userSchema";
+import { ChefHat, Cookie, LockKeyhole, Mail } from "lucide-react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { Link } from "react-router-dom";
+// import pizza from "@/assets/pizzatiny.webp"
+import z from "zod";
+
+// type LoginInputState = {
+//     email:string,
+//     password:string,
+// }
+
+const Login = () => {
+  const [input, setInput] = useState<loginInputState>({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState<Partial<loginInputState>>({});
+  const changehandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    //form validation
+    const result = userLoginSchema.safeParse(input);
+    if (!result.success) {
+      const fieldErrors = z.flattenError(result.error).fieldErrors;
+      setErrors(fieldErrors as Partial<loginInputState>);
+      console.log(errors);
+      return;
+    }
+    console.log(input);
+  };
+  const loading: boolean = false;
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <form
+        onSubmit={submitHandler}
+        className="space-y-6 md:p-8 w-full max-w-md  rounded-lg"
+      >
+        {/* <div className="w-full flex items-center justify-center"> */}
+        {/* <img src={pizza} className="w-60 relative inset-0 opacity-70" alt="" /> */}
+
+        <h2 className="font-bold font-cursive text-3xl text-orange text-center uppercase flex justify-center items-center">
+          <ChefHat className="rotate-330" size={30} /> Foodfactory
+        </h2>
+        {/* </div> */}
+        <div className="relative ">
+          <input
+            type="email"
+            className="border w-full rounded-md pl-10 py-2"
+            placeholder="Email"
+            name="email"
+            value={input.email}
+            onChange={changehandler}
+          />
+          <Mail
+            className="pointer-events-none absolute inset-y-3 left-2 text-gray-500"
+            size={20}
+          />
+          {errors && <span className="text-red-400">{errors.email}</span>}
+        </div>
+        <div className="relative">
+          <input
+            type="password"
+            className="border w-full rounded-md pl-10 py-2"
+            placeholder="password"
+            name="password"
+            value={input.password}
+            onChange={changehandler}
+          />
+          <LockKeyhole
+            className="pointer-events-none absolute inset-y-3 left-2 text-gray-500"
+            size={20}
+          />
+          {errors && <span className="text-red-400">{errors.password}</span>}
+        </div>
+        <div className="">
+          {loading ? (
+            <Button disabled className="bg-orange w-full hover:bg-hoverOrange">
+              <Cookie size={2} className="mr-1 animate-spin" /> Please wait{" "}
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              className="bg-orange w-full hover:bg-hoverOrange"
+            >
+              Login
+            </Button>
+          )}
+          <p className="flex justify-center items-center pt-4">
+            <Link
+              to={"/forgot-password"}
+              className=" hover:text-blue-400 text-gray-500 text-center"
+            >
+              Forgot password
+            </Link>
+          </p>
+        </div>
+        <p className="border-t pt-1 text-gray-500 text-center">
+          Don't have an account ?
+          <Link to={"/signup"} className="text-blue-400">
+            {" "}
+            Signup
+          </Link>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
