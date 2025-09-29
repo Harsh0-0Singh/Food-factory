@@ -169,23 +169,23 @@ const MobileNavbar = () => {
           <User/>
           <span>Profile</span>
           </Link>
-          <Link to={'/orders'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
+          <Link to={'/order/status'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
           <HandPlatter/>
           <span>Order</span>
           </Link>
-          <Link to={'/profile'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
+          <Link to={'/cart'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
           <ShoppingCart/>
           <span>Cart</span>
           </Link>
-          <Link to={'/profile'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
+          <Link to={'/admin/menu'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
           <SquareMenu/>
           <span>Menu</span>
           </Link>
-          <Link to={'/profile'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
+          <Link to={'/admin/restaurant'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
           <UtensilsCrossed/>
           <span>Restaurant</span>
           </Link>
-          <Link to={'/profile'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
+          <Link to={'/admin/orders'} className="flex items-center gap-4 hover:bg-gray-200 rounded-lg cursor-pointer px-3 font-medium py-2 hover:text-gray-900">
           <PackageCheckIcon/>
           <span>Restaurant Orders</span>
           </Link>
